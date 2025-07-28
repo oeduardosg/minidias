@@ -1,0 +1,24 @@
+{
+  "name": "minidias",
+  "version": "1.0.0",
+  "description": "O projeto é um website onde o usuário é capaz de registrar seus dias gerando um diário da sua vida",
+  "main": "teste3.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "jsdoc -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oeduardosg/minidias.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oeduardosg/minidias/issues"
+  },
+  "homepage": "https://github.com/oeduardosg/minidias#readme"
+}
