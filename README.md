@@ -31,3 +31,38 @@ A documentação será criada e pode ser acessada através do arquivo ```index.h
 
 ## Execução
 
+1. **Clone o repositório:**
+
+```
+git clone https://github.com/oeduardosg/minidias.git
+```
+
+2. **Abra o terminal e navegue até o backend:**
+
+```
+cd minidias/backend
+```
+
+4. **Inicie o PocketBase:**
+
+```
+./pocketbase serve
+```
+
+5. **Abra outro terminal e siga para o frontend:**
+
+```
+cd minidias/frontend
+```
+
+6. **Instale as dependências:**
+
+```
+npm install
+```
+
+7. **Inicie a aplicação VueJS**
+
+```
+npm run dev
+```
