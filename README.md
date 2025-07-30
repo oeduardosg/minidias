@@ -4,7 +4,7 @@ O projeto é um website onde o usuário é capaz de registrar seus dias gerando 
 
 ## Diagrama de classes
 
-![alt text](https://github.com/oeudardosg/minidias/blob/main/uml.png?raw=true)
+![alt text](https://github.com/oeduardosg/minidias/blob/main/uml.png?raw=true)
 
 ## Ferramentas
 
