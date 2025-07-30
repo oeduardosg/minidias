@@ -6,7 +6,10 @@ O projeto é um website onde o usuário é capaz de registrar seus dias gerando 
 
 ## Ferramentas
 
-Para a construção do código, as ferramentas utilizadas foram: git para o versionamento, npm para build e jest para os testes
+Para a construção do código, as ferramentas utilizadas foram:
+- git para o versionamento;
+- npm e vite para build;
+- vitest para os testes
 
 ## Frameworks
 
@@ -31,13 +34,13 @@ A documentação será criada e pode ser acessada através do arquivo ```index.h
 
 ## Execução
 
-1. **Clone o repositório:**
+1. **Abra o terminal e clone o repositório:**
 
 ```
 git clone https://github.com/oeduardosg/minidias.git
 ```
 
-2. **Abra o terminal e navegue até o backend:**
+2. **Navegue até o backend:**
 
 ```
 cd minidias/backend
@@ -66,3 +69,5 @@ npm install
 ```
 npm run dev
 ```
+
+8. **Abra o navegador e acesse http://localhost:5173 para visualizar a apliclação**
