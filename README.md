@@ -4,16 +4,19 @@ O projeto é um website onde o usuário é capaz de registrar seus dias gerando 
 
 ## Diagrama de classes
 
+![alt text](https://github.com/oeudardosg/minidias/blob/main/uml.png?raw=true)
+
 ## Ferramentas
 
 Para a construção do código, as ferramentas utilizadas foram:
-- git para o versionamento;
-- npm e vite para build;
-- vitest para os testes
+- Versionamento: git (GitHub)
+- Package Manager: npm
+- Build: vite 
+- Testes: vitest
 
 ## Frameworks
 
-- Front-end: VueJS
+- Front-end: VueJS e Tailwind CSS
 - Back-end: PocketBase
 
 ## Gerar documentação do código
