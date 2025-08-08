@@ -31,15 +31,20 @@ const login = async () => {
 </script>
 
 <template>
-  <form @submit.prevent="login">
-    <label for="email">Email</label>
-    <input type="text" id="email" v-model="email"><br>
+  <section class="w-full h-screen flex justify-center items-center">
+    <form @submit.prevent="login">
+      <h1 class="text-3xl mb-[2vh]">Minidias</h1>
 
-    <label for="password">Password</label>
-    <input type="text" id="password" v-model="password"><br>
+      <input type="text" id="email" v-model="email" placeholder="email" class="w-full border-2 border-solid rounded mb-[1vh] px-1"><br>
+      <input type="password" id="password" v-model="password" placeholder="senha" class="w-full border-2 border-solid rounded mb-[0.5vh] px-1"><br>
 
-    <div v-if="isPwdWrong" class="text-red-500">email or password is wrong</div>
+      <div v-if="isPwdWrong" class="text-red-500 text-right">email ou senha incorretos</div>
 
-    <button type="submit" class="bg-green-700 rounded">Submit</button>
-  </form>
+      <div class="w-full text-right mb-[0.5vh] text-blue-900">esqueceu a senha?</div>
+
+      <button type="submit" class="bg-blue-900 text-white rounded w-full mb-[0.5vh]">Entrar</button>
+
+      <div>Não tem uma conta? <span class="text-blue-900">Cadastrar-se</span></div>
+    </form>
+  </section>
 </template>
