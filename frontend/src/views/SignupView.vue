@@ -15,8 +15,9 @@ const pwdSmall = ref(false);
 const router = useRouter();
 
 const signup = async () => {
-    if(confirm_password.value == password.value) pwdWrong.value = false;
-    if(password.value.length >= 8) pwdSmall.value = false;
+    pwdWrong.value = false;
+    pwdSmall.value = false;
+    emailExists.value = false;
 
     try {
         const data = {
