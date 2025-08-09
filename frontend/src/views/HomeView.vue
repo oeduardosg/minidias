@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 
 let pb = null;
 const router = useRouter();
-const email = ref('');
+const name = ref('');
 
 const logout = () => {
   pb.authStore.clear();
@@ -20,12 +20,12 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
-  email.value = pb.authStore.isValid ? pb.authStore.record.email : null;
+  name.value = pb.authStore.isValid ? pb.authStore.record.name : null;
 })
 </script>
 
 <template>
-  <h2>Welcome {{ email }}</h2>
+  <h2>Welcome {{ name }}</h2>
   <button @click="logout" class="bg-red-700 rounded">Logout</button>
   <Navbar/>
 </template>
