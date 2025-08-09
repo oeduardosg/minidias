@@ -1,5 +1,4 @@
 <template>
-    <!-- Note: several SVG and path attributes omitted for brevity -->
     <svg
         :class="{ selected }"
         :title="selected ? 'Selected' : 'Unselected'"
