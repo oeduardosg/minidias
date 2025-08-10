@@ -31,7 +31,7 @@ defineProps({
 
 <template>
     <section class="flex flex-wrap flex-col justify-start p-4 gap-1 w-[85vw] h-[60vh] bg-white">
-        <div class="flex w-full h-[30vh] bg-gray-700">
+        <div class="flex justify-center w-full max-h-[30vh]">
             <img :src="image">
         </div>
         <div class="flex justify-between w-full items-center">
