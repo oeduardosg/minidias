@@ -30,7 +30,7 @@ defineProps({
 </script>
 
 <template>
-    <section class="flex flex-col justify-start p-4 gap-1 w-[85vw] h-[60vh] bg-white">
+    <section class="flex flex-wrap flex-col justify-start p-4 gap-1 w-[85vw] h-[60vh] bg-white">
         <div class="flex w-full h-[30vh] bg-gray-700">
             <img :src="image">
         </div>
@@ -38,7 +38,7 @@ defineProps({
             <div>{{ date }}</div>
             <div>{{ local }}</div>
         </div>
-        <div>
+        <div class="wrap-anywhere">
             {{ text }}
         </div>
         <div class="flex grow justify-between items-end">

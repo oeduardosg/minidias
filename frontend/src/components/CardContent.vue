@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-    <button class="flex justify-center items-center gap-1 bg-[#3F146C] rounded-full h-[4vh] w-auto p-2">
+    <button class="flex justify-center items-center gap-1 bg-[#3F146C] transition delay-50 duration-300 ease-in-out hover:bg-[#16569E] cursor-pointer rounded-full h-[4vh] w-auto p-2">
         <Icon :caminho="icon_path" color="#ffffff" size="20"/>
         <div class="text-white text-sm">{{ content_name }}</div>
     </button>

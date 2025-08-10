@@ -22,7 +22,7 @@ export default {
             default: false,
         },
         size: {
-            type: Number,
+            type: String,
             default: 40,
         },
         color: {
