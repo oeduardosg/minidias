@@ -2,7 +2,7 @@
 import Navbar from '@/components/Navbar.vue';
 import PocketBase from 'pocketbase';
 import { onBeforeMount, onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
 let pb = null;
 const router = useRouter();
@@ -27,5 +27,6 @@ onMounted(() => {
 <template>
   <h2>Welcome {{ name }}</h2>
   <button @click="logout" class="bg-red-700 rounded">Logout</button>
+  <RouterLink to="/friends" class="bg-green-700 rounded">Friends</RouterLink>
   <Navbar/>
 </template>
