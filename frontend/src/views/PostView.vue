@@ -8,6 +8,14 @@ import { useRouter } from 'vue-router';
 let pb = null;
 const router = useRouter();
 
+onBeforeMount(() => {
+    pb = new PocketBase('http://127.0.0.1:8090');
+    if(!pb.authStore.isValid) {
+        alert("Você deve estar logado para acessar essa página!");
+        router.replace("/login");
+    }
+})
+
 const post = async () => {
 
     pb = new PocketBase('http://127.0.0.1:8090');
