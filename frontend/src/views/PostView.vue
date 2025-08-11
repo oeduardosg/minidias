@@ -76,6 +76,7 @@ function addFriends() {
     <CardCreate @typing="addText" @image="sendImage" @date="addDate" @local="addLocal" @mood="addMood" @friends="addFriends" @posts="post"/>
     <input
         id="textEditor"
+        maxlength="160"
         v-model="description"
         type="text"
         class="opacity-0"
