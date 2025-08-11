@@ -19,10 +19,16 @@ const post = async () => {
     formData.append("local", local.value);
     formData.append("mood", mood.value);
     formData.append("friends", friends.value);
-    formData.append("image", input.files[0]);
+    if(input && input.files[0]) formData.append("image", input.files[0]);
 
-    const record = await pb.collection('cards').create(formData);
-    console.log("oi o arquivo foi enviado!")
+    try {
+        const record = await pb.collection('cards').create(formData);
+        console.log("Card foi enviado para a db com sucesso!");
+        router.replace('/');
+    }
+    catch (err) {
+        console.error("Error:", err.data);
+    }
 };
 
 const description = ref('');
@@ -81,7 +87,6 @@ function addFriends() {
         v-on:change="acceptImage"
         accept="image/png, image/jpg"
         class="opacity-0"
-        enctype="multipart/form-data"
         autofocus
     />
     <input
