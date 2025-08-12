@@ -1,5 +1,4 @@
 <template>
-    <!-- Note: several SVG and path attributes omitted for brevity -->
     <svg
         :class="{ selected }"
         :title="selected ? 'Selected' : 'Unselected'"
@@ -23,8 +22,8 @@ export default {
             default: false,
         },
         size: {
-            type: Number,
-            default: 40,
+            type: String,
+            default: '40',
         },
         color: {
             type: String,
