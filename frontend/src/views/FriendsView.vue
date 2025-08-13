@@ -19,21 +19,16 @@ onBeforeMount(() => {
 });
 
 onMounted(async () => {
-  const requests = await pb.collection('friendship').getList(1, 10,{
+  const requests = await pb.collection('friendship').getFullList({
     filter: `friend2="${pb.authStore.record.id}"&&active=false`,
   });
-  if(requests.totalItems > 0) isThereRequests.value = true;
+  if(requests.length > 0) isThereRequests.value = true;
 
-  const records = await pb.collection('users').getList(1, 10, {
-    filter: `name!="${pb.authStore.record.name}"`,
-  });
-  
   friendRequests.value = [];
-  for(const user of records.items){
-    for(const request of requests.items){
-      if(user.id == request.friend1 || user.id == request.friend2) friendRequests.value.push({"user": user, "request":request});
-    }
+  for(const request of requests){
+    friendRequests.value.push({"user": await pb.collection('users').getOne(request.friend1), "request":request});
   }
+  
 
 });
 
@@ -43,7 +38,7 @@ const search = async () => {
   });
 
 
-  const friendships = await pb.collection('friendship').getList(1, 10,{
+  const friendships = await pb.collection('friendship').getFullList({
     filter: `friend1="${pb.authStore.record.id}"||friend2="${pb.authStore.record.id}"`,
   });
 
@@ -53,10 +48,10 @@ const search = async () => {
   
   for(const user of records.items){
     users.value.push(user);
-    for(const friendship of friendships.items){
+    for(const friendship of friendships){
       if(friendship.friend1 == user.id || friendship.friend2 == user.id) {
         users.value.splice(users.value.indexOf(user), 1);
-        if(friendship.active) friends.value.push(user);
+        if(friendship.active) friends.value.push({'user': user, 'friendship': friendship});
         else pendings.value.push(user);
       }
   }
@@ -93,6 +88,12 @@ const reject = async (request) => {
   location.reload();
 };
 
+const remove = async (friendship) => {
+  const record = await pb.collection('friendship').delete(friendship.id);
+
+  location.reload();
+}
+
 </script>
 
 <template>
@@ -110,7 +111,7 @@ const reject = async (request) => {
 
     </form>
 
-    <div v-for="friend in friends" class="flex items-center justify-between p-2 w-full border-1 border-solid rounded">{{ friend.name }}</div>
+    <div v-for="friend in friends" class="flex items-center justify-between p-2 w-full border-1 border-solid rounded"> <RouterLink :to="`users/${friend.user.id}`">{{ friend.user.name }}</RouterLink> <button @click="remove(friend.friendship)" class="rounded bg-red-900 text-white px-3 py-1">Remover amigo</button></div>
     <div v-for="pending in pendings" class="flex items-center justify-between p-2 w-full border-1 border-solid rounded"><span>{{ pending.name }}</span> <span class="rounded bg-blue-900 text-white px-3 py-1">Pendente</span></div>
     <div v-for="user in users" class="flex items-center justify-between p-2 w-full border-1 border-solid rounded"><span>{{ user.name }}</span> <button @click="add(user.id)" class="rounded bg-green-900 text-white px-3 py-1">Adicione amigo</button></div>
 
