@@ -5,7 +5,7 @@ import CardContent from './CardContent.vue';
 
 <template>
     <section class="flex justify-center fixed bottom-0 w-full">
-        <div class="flex flex-wrap justify-center items-center w-[100vw] h-[25vh] bg-white rounded-t-[10vw] gap-x-[2vw]">
+        <div class="flex gap-3 flex-col justify-center items-center w-[100vw] h-[25vh] bg-white rounded-t-[10vw] gap-x-[2vw]">
             <div class="flex flex-wrap justify-center items-center gap-[3vw]">
                 <CardContent @click="$emit('date')" content_name="Data" icon_path="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z"/>
                 <CardContent @click="$emit('image')" content_name="Imagem" icon_path="M19,19H5V5H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M13.96,12.29L11.21,15.83L9.25,13.47L6.5,17H17.5L13.96,12.29Z"/>

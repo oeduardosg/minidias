@@ -11,6 +11,7 @@ const route = useRoute()
 const user = ref({});
 const cards = ref([]);
 const isShowing = ref(false);
+const avatar = ref('');
 
 onBeforeMount(() => {
   pb = new PocketBase('http://127.0.0.1:8090');
@@ -19,9 +20,11 @@ onBeforeMount(() => {
 })
 
 onMounted(async () => {
-  user.value = await pb.collection('users').getOne(route.params.id);
-  user.value.avatar = pb.files.getURL(user, user.avatar);
+  await pb.collection('users').authRefresh();
 
+  user.value = await pb.collection('users').getOne(route.params.id);
+  avatar.value = pb.files.getURL(user.value, user.value.avatar);
+  console.log(avatar.value);
   cards.value = await pb.collection('cards').getFullList({
     filter: `idUser="${user.value.id}"`,
   });
@@ -56,7 +59,7 @@ function showOff() {
     </div>
     <div class="flex flex-col flex-wrap w-[100vw] h-[20vh] bg-white rounded-b-[10vw] gap-x-[2vw] gap-y-[5vh]">
     <div class="flex ml-[5vw] gap-5 items-center m-5">
-        <img :src="user.image" class="aspect-square rounded-full w-[25vw]"></img>
+        <img :src="avatar" style="object-fit: cover;" class="aspect-square rounded-full w-[25vw]"></img>
         <div class="flex flex-col">
         <div class="font-bold text-[20px]">{{ user.name }}</div>
         <div class="text-[14px]">Olá! Essa é a minha descrição completamente aleatória.</div>

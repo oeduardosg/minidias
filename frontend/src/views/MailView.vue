@@ -55,7 +55,8 @@ const change = async (post) => {
       <div @click="change(post)" v-for="post in posts" class="p-[9px] w-[144px] h-[190px] bg-white shrink-0">
         <img class="h-[126px] w-[126px]" style="object-fit: cover;" :src="post.image">
         <div>{{ post.date }}</div>
-        <div>{{ post.text }}</div>
+        <div v-if="post.text.length > 13">{{ post.text.substring(0, 12) + '...' }}</div>
+        <div v-else>{{ post.text }}</div>
       </div>
     </section>
 

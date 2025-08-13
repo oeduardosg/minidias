@@ -70,7 +70,7 @@ function showOff() {
           <button @click="logout" class="p-[1.5vw] rounded-full bg-red-700 rounded text-white font-bold">Logout</button>
         </div>
         <div class="flex ml-[5vw] gap-5 items-center m-5">
-          <img :src="avatar" class="aspect-square rounded-full w-[25vw]"></img>
+          <img :src="avatar" class="aspect-square rounded-full w-[25vw]" style="object-fit: cover;"></img>
           <div class="flex flex-col">
             <div class="font-bold text-[20px]">{{ name }}</div>
             <div class="text-[14px]">Olá! Essa é a minha descrição completamente aleatória.</div>
