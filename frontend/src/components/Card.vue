@@ -35,9 +35,9 @@ defineProps({
 
 <template>
 
-    <section v-if="small" class="flex flex-wrap flex-col justify-start p-1 w-[20vw] h-[12vh] bg-white font-mono">
+    <section v-if="small" class="flex flex-wrap flex-col justify-start p-1 w-[20vw] bg-white font-mono">
         <div class="flex justify-center items-center w-full max-h-[28vh]">
-            <img class="max-h-[5vh]" :src="image">
+            <img class="w-full aspect-square" style="object-fit: cover;" :src="image">
         </div>
         <div class="flex justify-between w-full items-center">
             <div class="text-gray-500 italic text-[8px]">{{ date }}</div>
