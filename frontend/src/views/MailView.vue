@@ -54,7 +54,8 @@ const change = async (post) => {
     <section class="flex gap-2 m-2 overflow-scroll">
       <div @click="change(post)" v-for="post in posts" class="p-[9px] w-[144px] h-[190px] bg-white shrink-0">
         <img class="h-[126px] w-[126px]" style="object-fit: cover;" :src="post.image">
-        {{ post.text }}
+        <div>{{ post.date }}</div>
+        <div>{{ post.text }}</div>
       </div>
     </section>
 

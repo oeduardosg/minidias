@@ -97,6 +97,8 @@ const remove = async (friendship) => {
 </script>
 
 <template>
+  <div class="pt-2">
+  <RouterLink to="/" class="bg-[#3F146C] rounded-r-full text-white font-medium px-[2vw] p-0.5 w-[20vw] h-[3.5vh] hover:bg-[#16569E]">Voltar</RouterLink>
   <section class="flex flex-col gap-5 w-full p-1">
     <div v-if="isThereRequests">
       <h1 class="text-3xl mb-[2vh]">Pedidos de amizade</h1>
@@ -116,6 +118,6 @@ const remove = async (friendship) => {
     <div v-for="user in users" class="flex items-center justify-between p-2 w-full border-1 border-solid rounded"><span>{{ user.name }}</span> <button @click="add(user.id)" class="rounded bg-green-900 text-white px-3 py-1">Adicione amigo</button></div>
 
   </section>
-  
+  </div>
 
 </template>
