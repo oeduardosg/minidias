@@ -21,7 +21,7 @@ onBeforeMount(() => {
 
 onMounted(async () => {
   const friendships = await pb.collection('friendship').getFullList({
-    filter: `friend1="${pb.authStore.record.id}"||friend2="${pb.authStore.record.id}"`,
+    filter: `(friend1="${pb.authStore.record.id}"||friend2="${pb.authStore.record.id}")&&active=true`,
   });
 
   for(const friendship of friendships){
@@ -61,11 +61,11 @@ const change = async (post) => {
     <section class="m-2">
       <div v-if="visualizando" class="p-[9px] w-full h-full bg-white shrink-0">
         <div class="flex justify-between w-full items-center">
-          <div>{{ mainUser.name }}</div>
+          <RouterLink :to="`users/${mainUser.id}`">{{ mainUser.name }}</RouterLink>
           <div>{{ mainPost.date }}</div>
         </div>
         <img class="aspect-square w-full my-1" style="object-fit: cover;" :src="mainPost.image">
-        {{ mainPost.text }}
+        <div class="h-[50px]">{{ mainPost.text }}</div>
       </div>
     </section>
 
