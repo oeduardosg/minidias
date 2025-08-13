@@ -82,7 +82,7 @@ function addFriends() {
 
 <template>
     <section class="flex flex-col justify-center">
-        <RouterLink to="/" class="bg-[#3F146C] rounded-r-full text-white font-medium px-[2vw] mt-2 w-[20vw] h-[3.5vh]">Voltar</RouterLink>
+        <RouterLink to="/" class="bg-[#3F146C] rounded-r-full text-white font-medium px-[2vw] mt-2 w-[20vw] h-[3.5vh] hover:bg-[#16569E]">Voltar</RouterLink>
         <Card class="grow m-auto mt-[7.5vh]" :text="description" :image="url" :date="date" :local="local" :mood="mood" :friends="friends"/>
         <CardCreate class="shrink" @typing="addText" @image="sendImage" @date="addDate" @local="addLocal" @mood="addMood" @friends="addFriends" @posts="post"/>
     </section>
