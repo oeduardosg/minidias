@@ -22,6 +22,7 @@ const post = async () => {
     const input = document.getElementById("imageReceiver");
 
     const formData = new FormData();
+    formData.append("idUser", pb.authStore.record.id);
     formData.append("text", description.value);
     formData.append("date", date.value);
     formData.append("local", local.value);
