@@ -70,7 +70,7 @@ function showOff() {
           <button @click="logout" class="p-[1.5vw] rounded-full bg-red-700 rounded text-white font-bold">Logout</button>
         </div>
         <div class="flex ml-[5vw] gap-5 items-center m-5">
-          <img :src="avatar" class="aspect-square rounded-full w-[25vw]" style="object-fit: cover;"></img>
+          <img :src="avatar" class="aspect-square rounded-full w-[25vw] max-h-[200px] max-w-[200px]" style="object-fit: cover;"></img>
           <div class="flex flex-col">
             <div class="font-bold text-[20px]">{{ name }}</div>
             <div class="text-[14px]">Olá! Essa é a minha descrição completamente aleatória.</div>
@@ -79,7 +79,7 @@ function showOff() {
       </div>
       <section class="m-5 flex flex-wrap justify-start gap-2">
         <div v-for="card in cards">
-          <Card class="cursor-pointer" @click="showCard(card)" :image="pb.files.getURL(card, card.image)" :text="card.text.substring(0, 20) + '...'" :date="card.date" :small="true" />
+          <Card class="cursor-pointer" @click="showCard(card)" :image="pb.files.getURL(card, card.image)" :text=card.text :date="card.date" :small="true" />
         </div>
       </section>
   </section>
