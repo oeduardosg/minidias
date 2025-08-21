@@ -35,7 +35,7 @@ defineProps({
 
 <template>
 
-    <section v-if="small" class="flex flex-wrap flex-col justify-start w-[20vw] max-w-[200px] bg-white font-mono" style="padding: min(.9vw, 9px);">
+    <section v-if="small" class="flex flex-wrap flex-col justify-start w-[20vw] max-w-[200px] h-[27vw] max-h-[270px] bg-white font-mono gap-[0.5vw]" style="padding: min(.9vw, 9px);">
         <div class="flex justify-center items-center w-full">
             <img class="w-full aspect-square" style="object-fit: cover;" :src="image">
         </div>

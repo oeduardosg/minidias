@@ -18,13 +18,17 @@ onBeforeMount(() => {
 
 const post = async () => {
 
-    pb = new PocketBase('http://127.0.0.1:8090');
     const input = document.getElementById("imageReceiver");
+    if((description.value == '' && !input.files[0]) || date.value == '') return;
 
+    let fixedDate = "";
+    for(const n of date.value.split('-').reverse()) fixedDate += n + '/';
+    fixedDate = fixedDate.slice(0, -1);
+    
     const formData = new FormData();
     formData.append("idUser", pb.authStore.record.id);
     formData.append("text", description.value);
-    formData.append("date", date.value);
+    formData.append("date", fixedDate);
     formData.append("local", local.value);
     formData.append("mood", mood.value);
     formData.append("friends", friends.value);
@@ -62,7 +66,7 @@ const acceptImage = () => {
 }
 
 function addDate() {
-    document.getElementById("dateEditor").focus();
+    document.getElementById("dateEditor").showPicker();
 }
 
 function addLocal() {
@@ -82,8 +86,11 @@ function addFriends() {
 
 <template>
     <section class="flex flex-col justify-center">
-        <RouterLink to="/" class="bg-[#3F146C] rounded-r-full text-white font-medium px-[2vw] mt-2 w-[20vw] h-[3.5vh] hover:bg-[#16569E]">Voltar</RouterLink>
-        <Card class="grow m-auto mt-[7.5vh]" :text="description" :image="url" :date="date" :local="local" :mood="mood" :friends="friends"/>
+        <div class="flex justify-between align center mt-2">
+            <RouterLink to="/" class="bg-[#3F146C] rounded-r-full text-white font-medium px-[2vw] pt-[0.5vw] w-[20vw] h-[3.5vh] hover:bg-[#16569E]">Voltar</RouterLink>
+            <input class="opacity-0" id="dateEditor" v-model="date" type="date" autofocus/>
+        </div>
+        <Card class="grow m-auto mt-[5vh]" :text="description" :image="url" :date="date" :local="local" :mood="mood" :friends="friends"/>
         <CardCreate class="shrink" @typing="addText" @image="sendImage" @date="addDate" @local="addLocal" @mood="addMood" @friends="addFriends" @posts="post"/>
     </section>
     <input
@@ -91,7 +98,7 @@ function addFriends() {
         maxlength="160"
         v-model="description"
         type="text"
-        class="opacity-0"
+        class="opacity-0 hide"
         autofocus
     />
     <input
@@ -99,45 +106,40 @@ function addFriends() {
         type="file"
         v-on:change="acceptImage"
         accept="image/png, image/jpg"
-        class="opacity-0"
-        autofocus
-    />
-    <input
-        id="dateEditor"
-        v-model="date"
-        type="text"
-        class="opacity-0"
+        class="opacity-0 hide"
         autofocus
     />
     <input
         id="localEditor"
         v-model="local"
         type="text"
-        class="opacity-0"
+        class="opacity-0 hide"
         autofocus
     />
     <input
         id="moodEditor"
         v-model="mood"
         type="text"
-        class="opacity-0"
+        class="opacity-0 hide"
         autofocus
     />
     <input
         id="friendsEditor"
         v-model="friends"
         type="text"
-        class="opacity-0"
+        class="opacity-0 hide"
         autofocus
     />
 </template>
 
 <style scoped>
 
-input {
+.hide {
   position: absolute; /* or fixed */
   left: -9999px; /* Pushes it far to the left */
   /* or top: -9999px; or bottom: -9999px; etc. */
 }
+
+
 
 </style>
