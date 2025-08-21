@@ -4,6 +4,7 @@ import PocketBase from 'pocketbase';
 import { onBeforeMount, onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import Card from '@/components/Card.vue';
+import { compareDates } from '../compareDates';
 
 let pb = null;
 const router = useRouter();
@@ -30,7 +31,7 @@ onMounted(async () => {
   avatar.value = pb.files.getURL(pb.authStore.model, pb.authStore.model.avatar);
 
   cards.value = await pb.collection('cards').getFullList({filter: `idUser="${pb.authStore.record.id}"`});
-  console.log(cards);
+  cards.value.sort(compareDates);
 })
 
 const showingImage = ref('');
