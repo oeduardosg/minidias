@@ -34,27 +34,26 @@ onMounted(async () => {
   cards.value.sort(compareDates);
 })
 
-const showingImage = ref('');
-const showingText = ref('');
-const showingLocal = ref('');
-const showingDate = ref('');
-const showingMood = ref('');
-const showingFriends = ref('');
+const showingCard = ref(null);
 const isShowing = ref(false);
 
 function showCard(card) {
-  showingImage.value = pb.files.getURL(card, card.image);
-  showingText.value = card.text;
-  showingLocal.value = card.local;
-  showingDate.value = card.date;
-  showingMood.value = card.mood;
-  showingFriends.value = card.friends;
+  showingCard.value = card;
   isShowing.value = true;
-  console.log(card);
+  
 }
 
 function showOff() {
   isShowing.value = false;
+}
+
+const deleteCard = async () => {
+  try {
+    await pb.collection('cards').delete(showingCard.value.id);
+    location.reload();
+  } catch (err) {
+    console.error("Error:", err.data);
+  }
 }
 
 </script>
@@ -62,13 +61,14 @@ function showOff() {
 <template>
   <section class="flex flex-col w-full relative">
 
-      <div @click="showOff()" class="absolute w-full h-screen flex justify-center items-center backdrop-brightness-50" v-if="isShowing">
-        <Card @click.stop :image="showingImage" :date="showingDate" :text="showingText" :local="showingLocal" :mood="showingMood" :friends="showingFriends"/>
+      <div @click="showOff()" class="absolute w-full h-screen flex flex-col justify-center items-center backdrop-brightness-50" v-if="isShowing">
+        <div @click="deleteCard()" class="bg-red-700 fixed top-0 left-0 font-bold aspect-square h-[3vh] flex justify-center content-center flex-wrap rounded"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can-outline</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg></div>
+        <Card @click.stop :image="pb.files.getURL(showingCard, showingCard.image)" :date="showingCard.date" :text="showingCard.text" :local="showingCard.local" :mood="showingCard.mood" :friends="showingCard.friends"/>
       </div>
-      <div class="flex flex-col flex-wrap w-[100vw] h-[35vh] bg-white rounded-b-[10vw] gap-x-[2vw] gap-y-[5vh]">
-        <div class="flex gap-x-[3vw] m-[1vh] justify-end">
-          <RouterLink to="/friends" class="p-[1.5vw] rounded-full bg-green-700 rounded text-white font-bold">Friends</RouterLink>
-          <button @click="logout" class="p-[1.5vw] rounded-full bg-red-700 rounded text-white font-bold">Logout</button>
+      <div class="flex flex-col w-[100vw] h-[30vh] bg-white rounded-b-[10vw]">
+        <div class="flex gap-x-[10px] m-[1vh] justify-end">
+          <RouterLink to="/friends" class="p-[10px] rounded-full bg-green-700 rounded text-white font-bold">Friends</RouterLink>
+          <button @click="logout" class="p-[10px] rounded-full bg-red-700 rounded text-white font-bold">Logout</button>
         </div>
         <div class="flex ml-[5vw] gap-5 items-center m-5">
           <img :src="avatar" class="aspect-square rounded-full w-[25vw] max-h-[200px] max-w-[200px]" style="object-fit: cover;"></img>

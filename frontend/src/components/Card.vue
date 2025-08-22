@@ -49,7 +49,7 @@ defineProps({
 
     </section>
 
-    <section v-else class="flex flex-wrap flex-col justify-start p-4 gap-1 w-[85vw] h-[60vh] bg-white font-mono text-[15px]/6">
+    <section v-else class="flex flex-wrap flex-col justify-start p-4 gap-1 w-[85vw] max-w-[400px] h-[60vh] bg-white font-mono text-[15px]/6">
         <div class="flex justify-center w-full max-h-[28vh]">
             <img :src="image">
         </div>
