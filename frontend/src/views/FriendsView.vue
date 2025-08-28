@@ -13,7 +13,7 @@ const friendRequests = ref([]);
 const isThereRequests = ref(false);
 
 onBeforeMount(() => {
-  pb = new PocketBase('http://127.0.0.1:8090');
+  pb = new PocketBase(import.meta.env.VITE_POCKETBASE_ENDPOINT);
 
   if(!pb.authStore.isValid) router.replace("/login");
 });

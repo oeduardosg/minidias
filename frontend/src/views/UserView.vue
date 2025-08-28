@@ -4,6 +4,7 @@ import PocketBase from 'pocketbase';
 import { onBeforeMount, onMounted, ref } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import Card from '@/components/Card.vue';
+import { compareDates } from '../compareDates';
 
 let pb = null;
 const router = useRouter();
@@ -14,7 +15,7 @@ const isShowing = ref(false);
 const avatar = ref('');
 
 onBeforeMount(() => {
-  pb = new PocketBase('http://127.0.0.1:8090');
+  pb = new PocketBase(import.meta.env.VITE_POCKETBASE_ENDPOINT);
 
   if(!pb.authStore.isValid) router.replace("/login");
 })
@@ -28,6 +29,7 @@ onMounted(async () => {
   cards.value = await pb.collection('cards').getFullList({
     filter: `idUser="${user.value.id}"`,
   });
+  cards.value.sort(compareDates);
 })
 
 const showingImage = ref('');
@@ -57,9 +59,9 @@ function showOff() {
     <div @click="showOff()" class="absolute w-full h-screen flex justify-center items-center backdrop-brightness-50" v-if="isShowing">
         <Card @click.stop :image="showingImage" :date="showingDate" :text="showingText" :local="showingLocal" :mood="showingMood" :friends="showingFriends"/>
     </div>
-    <div class="flex flex-col flex-wrap w-[100vw] h-[20vh] bg-white rounded-b-[10vw] gap-x-[2vw] gap-y-[5vh]">
-    <div class="flex ml-[5vw] gap-5 items-center m-5">
-        <img :src="avatar" style="object-fit: cover;" class="aspect-square rounded-full w-[25vw]"></img>
+    <div class="flex flex-col flex-wrap w-[100vw]  bg-white rounded-b-[10vw] gap-x-[2vw] gap-y-[5vh]">
+    <div class="flex ml-[5vw] gap-5 items-center m-5 pb-3">
+        <img :src="avatar" style="object-fit: cover;" class="aspect-square rounded-full w-[25vw] max-w-[150px]"></img>
         <div class="flex flex-col">
         <div class="font-bold text-[20px]">{{ user.name }}</div>
         <div class="text-[14px]">Olá! Essa é a minha descrição completamente aleatória.</div>

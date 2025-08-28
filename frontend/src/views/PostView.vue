@@ -9,7 +9,7 @@ let pb = null;
 const router = useRouter();
 
 onBeforeMount(() => {
-    pb = new PocketBase('http://127.0.0.1:8090');
+    pb = new PocketBase(import.meta.env.VITE_POCKETBASE_ENDPOINT);
     if(!pb.authStore.isValid) {
         alert("Você deve estar logado para acessar essa página!");
         router.replace("/login");
@@ -18,8 +18,12 @@ onBeforeMount(() => {
 
 const post = async () => {
 
+    console.log("1");
+
     const input = document.getElementById("imageReceiver");
     if((description.value == '' && !input.files[0]) || date.value == '') return;
+
+    console.log("2");
 
     let fixedDate = "";
     for(const n of date.value.split('-').reverse()) fixedDate += n + '/';

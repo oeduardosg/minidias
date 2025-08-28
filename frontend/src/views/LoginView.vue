@@ -12,7 +12,7 @@ const router = useRouter()
 
 const login = async () => {
   try {
-    pb = new PocketBase('http://127.0.0.1:8090');
+    pb = new PocketBase(import.meta.env.VITE_POCKETBASE_ENDPOINT);
 
     const authData = await pb.collection('users').authWithPassword(email.value, password.value);
 

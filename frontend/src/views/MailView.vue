@@ -3,6 +3,7 @@ import { onMounted, onBeforeMount, ref } from 'vue';
 import Navbar from '../components/Navbar.vue';
 import PocketBase from 'pocketbase';
 import { useRouter } from 'vue-router';
+import { compareDates } from '../compareDates';
 
 let pb = null;
 const router = useRouter();
@@ -14,7 +15,7 @@ const visualizando = ref(false);
 
 
 onBeforeMount(() => {
-  pb = new PocketBase('http://127.0.0.1:8090');
+  pb = new PocketBase(import.meta.env.VITE_POCKETBASE_ENDPOINT);
 
   if(!pb.authStore.isValid) router.replace("/login");
 })
@@ -39,6 +40,8 @@ onMounted(async () => {
     }
   }
 
+  posts.value.sort(compareDates);
+
 })
 
 const change = async (post) => {
@@ -53,21 +56,22 @@ const change = async (post) => {
 <template>
     <section class="flex gap-2 m-2 overflow-scroll">
       <div @click="change(post)" v-for="post in posts" class="p-[9px] w-[144px] h-[190px] bg-white shrink-0">
-        <img class="h-[126px] w-[126px]" style="object-fit: cover;" :src="post.image">
+        <img v-if="post.image" class="h-[126px] w-[126px]" style="object-fit: cover;" :src="post.image">
         <div>{{ post.date }}</div>
-        <div v-if="post.text.length > 13">{{ post.text.substring(0, 12) + '...' }}</div>
+        <div v-if="!post.image && post.text.length > 40">{{ post.text.substring(0, 40) + '...' }}</div>
+        <div v-else-if="!post.image">{{ post.text }}</div>
+        <div v-else-if="post.text.length > 13">{{ post.text.substring(0, 12) + '...' }}</div>
         <div v-else>{{ post.text }}</div>
       </div>
     </section>
-
     <section class="m-2">
       <div v-if="visualizando" class="p-[9px] w-full h-full bg-white shrink-0">
         <div class="flex justify-between w-full items-center">
           <RouterLink :to="`users/${mainUser.id}`">{{ mainUser.name }}</RouterLink>
           <div>{{ mainPost.date }}</div>
         </div>
-        <img class="aspect-square w-full my-1" style="object-fit: cover;" :src="mainPost.image">
-        <div class="h-[50px]">{{ mainPost.text }}</div>
+        <img v-if="mainPost.image" class="aspect-square w-full my-1" style="object-fit: cover;" :src="mainPost.image">
+        <div class="min-h-[50px]">{{ mainPost.text }}</div>
       </div>
     </section>
 
